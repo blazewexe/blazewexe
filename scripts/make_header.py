@@ -1,87 +1,67 @@
-"""Generates assets/header.svg: equalizer bars and typed text, all locked to BPM.
-
-Edit BPM / LINES, then run:  python scripts/make_header.py
-"""
+"""Generate the self-contained Pac-Man-inspired profile visualizer."""
 from pathlib import Path
 
 BPM = 67
-LINES = [
-    "hi, im blaze",
-    "github: blazewexe",
-    "just a programmer",
-    "building things on beat",
-]
-BEATS_PER_LINE = 4
-
+USERNAME = "@blazewexe"
 W, H = 900, 240
-BG, FG, ACCENT, MUTED = "#0d1117", "#e6edf3", "#1db954", "#7d8590"
 FONT = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
-FS, CW = 38, 23  # font size, approx glyph advance for monospace
-TX, TY = 48, 112
-
-beat = 60 / BPM
-line_dur = beat * BEATS_PER_LINE
-cycle = line_dur * len(LINES)
-type_pct = 100 * 2 * beat / cycle  # typing takes two beats
+BEAT = 60 / BPM
 
 bars = []
-n, x0, bw, pitch, base, maxh = 40, 48, 12, 20.1, 215, 64
-for i in range(n):
-    pat = i % 4
-    delay = -((i * 0.37) % 2) * beat
+heights = [34, 58, 82, 46, 68, 38, 92, 52, 74, 42, 64, 30]
+for index, height in enumerate(heights):
+    x = 330 + index * 22
+    pattern = index % 4
     bars.append(
-        f'<rect class="bar p{pat}" x="{x0 + i * pitch:.1f}" y="{base - maxh}" '
-        f'width="{bw}" height="{maxh}" rx="2" style="animation-delay:{delay:.3f}s"/>'
+        f'''<rect class="bar p{pattern}" x="{x}" y="{198 - height}" width="12" height="{height}" rx="3" style="animation-delay:-{index * .17:.2f}s"/>'''
     )
 
-texts = []
-for i, line in enumerate(LINES):
-    width = len(line) * CW + 8
-    delay = i * line_dur
-    texts.append(
-        f'''<g class="line" style="animation-delay:{delay:.3f}s">
-  <text x="{TX}" y="{TY}" font-family="{FONT}" font-size="{FS}" fill="{FG}" xml:space="preserve">{line}</text>
-  <rect class="cover" x="{TX}" y="{TY - FS}" width="{width}" height="{FS + 16}" fill="{BG}"
-        style="animation-timing-function:steps({len(line)},end);animation-delay:{delay:.3f}s"/>
-</g>'''
-    )
-
-svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img"
-     aria-label="hi, im blaze. github blazewexe. just a programmer.">
-<style>
-  .bar {{ fill:{ACCENT}; transform-box:fill-box; transform-origin:50% 100%;
-         animation-duration:{beat * 2:.3f}s; animation-iteration-count:infinite;
-         animation-timing-function:ease-in-out; opacity:.9 }}
-  .p0 {{ animation-name:b0 }} .p1 {{ animation-name:b1 }}
-  .p2 {{ animation-name:b2 }} .p3 {{ animation-name:b3 }}
-  @keyframes b0 {{ 0%,100% {{ transform:scaleY(.12) }} 25% {{ transform:scaleY(1) }} 55% {{ transform:scaleY(.35) }} 80% {{ transform:scaleY(.7) }} }}
-  @keyframes b1 {{ 0%,100% {{ transform:scaleY(.2) }} 20% {{ transform:scaleY(.55) }} 50% {{ transform:scaleY(.95) }} 75% {{ transform:scaleY(.3) }} }}
-  @keyframes b2 {{ 0%,100% {{ transform:scaleY(.15) }} 30% {{ transform:scaleY(.8) }} 60% {{ transform:scaleY(.25) }} 85% {{ transform:scaleY(1) }} }}
-  @keyframes b3 {{ 0%,100% {{ transform:scaleY(.25) }} 15% {{ transform:scaleY(.9) }} 45% {{ transform:scaleY(.4) }} 70% {{ transform:scaleY(.65) }} }}
-  .pulse {{ fill:none; stroke:{ACCENT}; stroke-width:2; transform-box:fill-box; transform-origin:50% 50%;
-           animation:ring {beat:.3f}s ease-out infinite }}
-  @keyframes ring {{ 0% {{ transform:scale(.4); opacity:1 }} 100% {{ transform:scale(1.6); opacity:0 }} }}
-  .dot {{ fill:{ACCENT} }}
-  .line {{ opacity:0; animation-name:show; animation-duration:{cycle:.3f}s; animation-timing-function:linear;
-          animation-iteration-count:infinite; animation-fill-mode:backwards }}
-  @keyframes show {{ 0% {{ opacity:0 }} 1% {{ opacity:1 }} 24% {{ opacity:1 }} 25%,100% {{ opacity:0 }} }}
-  .cover {{ transform-box:fill-box; transform-origin:100% 50%;
-           animation-name:type; animation-duration:{cycle:.3f}s; animation-iteration-count:infinite; animation-fill-mode:backwards }}
-  @keyframes type {{ 0% {{ transform:scaleX(1) }} {type_pct:.2f}% {{ transform:scaleX(0) }} 100% {{ transform:scaleX(0) }} }}
-  @media (prefers-reduced-motion: reduce) {{
-    .bar, .pulse, .cover, .line {{ animation:none }}
-    .bar {{ transform:scaleY(.5) }} .cover {{ transform:scaleX(0) }}
-    .line {{ opacity:0 }} .line:first-of-type {{ opacity:1 }}
-  }}
-</style>
-<rect width="{W}" height="{H}" rx="10" fill="{BG}" stroke="#30363d"/>
-<text x="{W - 48}" y="44" text-anchor="end" font-family="{FONT}" font-size="14" fill="{MUTED}">{BPM} bpm</text>
-<circle class="dot" cx="{TX + 4}" cy="44" r="4"/>
-<circle class="pulse" cx="{TX + 4}" cy="44" r="9"/>
-<text x="{TX + 22}" y="49" font-family="{FONT}" font-size="14" fill="{MUTED}">now playing</text>
-{chr(10).join(texts)}
-{chr(10).join(bars)}
+svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="Pac-Man-inspired music visualizer for {USERNAME}">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#111936"/>
+    <stop offset="1" stop-color="#080b19"/>
+  </linearGradient>
+  <linearGradient id="bars" x1="0" y1="0" x2="0" y2="1">
+    <stop stop-color="#ffe66d"/>
+    <stop offset="1" stop-color="#ff9f43"/>
+  </linearGradient>
+  <style>
+    .bar {{ fill:url(#bars); transform-box:fill-box; transform-origin:50% 100%; animation-duration:{BEAT * 2:.2f}s; animation-iteration-count:infinite; animation-timing-function:ease-in-out }}
+    .p0 {{ animation-name:low }} .p1 {{ animation-name:mid }} .p2 {{ animation-name:high }} .p3 {{ animation-name:jump }}
+    .pac {{ animation:chomp .45s steps(2,end) infinite }}
+    .ticker {{ animation:run 11s linear infinite }}
+    @keyframes low {{ 0%,100% {{ transform:scaleY(.35) }} 50% {{ transform:scaleY(1) }} }}
+    @keyframes mid {{ 0%,100% {{ transform:scaleY(.6) }} 50% {{ transform:scaleY(.25) }} }}
+    @keyframes high {{ 0%,100% {{ transform:scaleY(.25) }} 50% {{ transform:scaleY(.9) }} }}
+    @keyframes jump {{ 0%,100% {{ transform:scaleY(.8) }} 50% {{ transform:scaleY(.35) }} }}
+    @keyframes chomp {{ from {{ opacity:1 }} to {{ opacity:.72 }} }}
+    @keyframes run {{ from {{ transform:translateX(920px) }} to {{ transform:translateX(-360px) }} }}
+    @media (prefers-reduced-motion:reduce) {{ .bar, .pac, .ticker {{ animation:none }} .ticker {{ transform:translateX(300px) }} }}
+  </style>
+</defs>
+<rect width="{W}" height="{H}" rx="12" fill="url(#bg)" stroke="#343b61"/>
+<path d="M28 39h28M28 39v28M872 201h-28M872 201v-28" fill="none" stroke="#ffdf5d" stroke-width="2"/>
+<text x="54" y="49" fill="#9da9d8" font-family="{FONT}" font-size="13" letter-spacing="3">PAC//PLAY  |  {BPM} BPM</text>
+<circle class="pac" cx="91" cy="101" r="29" fill="#ffdf5d"/>
+<path class="pac" d="M91 101L120 84A29 29 0 0 0 120 118Z" fill="#111936"/>
+<circle cx="98" cy="87" r="3" fill="#111936"/>
+<g fill="#ffdf5d">
+  <circle cx="139" cy="101" r="4"/><circle cx="160" cy="101" r="4"/><circle cx="181" cy="101" r="4"/>
+</g>
+<path d="M207 113h75" stroke="#ffdf5d" stroke-width="2" stroke-dasharray="2 8"/>
+<path d="M239 89c8-13 28-13 36 0v34h-36z" fill="#ff5c8a"/>
+<circle cx="250" cy="101" r="4" fill="#fff"/><circle cx="264" cy="101" r="4" fill="#fff"/>
+<circle cx="250" cy="101" r="2" fill="#111936"/><circle cx="264" cy="101" r="2" fill="#111936"/>
+<text x="54" y="166" fill="#f5f2df" font-family="{FONT}" font-size="31" font-weight="700" letter-spacing="2">{USERNAME}</text>
+<text x="55" y="190" fill="#8490bd" font-family="{FONT}" font-size="12" letter-spacing="2">RUNNING ON GOOD VIBES</text>
+<g>{chr(10).join(bars)}</g>
+<path d="M330 198H594" stroke="#566087"/>
+<g class="ticker" fill="#7cf7ff" font-family="{FONT}" font-size="13" letter-spacing="3">
+  <text x="0" y="224">{USERNAME}  |  {USERNAME}  |  {USERNAME}  |  {USERNAME}</text>
+</g>
 </svg>
 '''
+
 Path(__file__).resolve().parents[1].joinpath("assets/header.svg").write_text(svg)
 print("wrote assets/header.svg")
