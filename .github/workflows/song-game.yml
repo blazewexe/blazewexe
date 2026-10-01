@@ -1,0 +1,64 @@
+name: song-game
+
+on:
+  issues:
+    types: [opened]
+
+# Serialize runs so two simultaneous suggestions never clobber each other's commit.
+concurrency:
+  group: song-game
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Issue text goes in through env vars only, never interpolated into shell.
+      - name: Process suggestion
+        id: run
+        run: python scripts/update.py
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+          SPOTIFY_PLAYLIST_ID: ${{ secrets.SPOTIFY_PLAYLIST_ID }}
+
+      - name: Commit README and data
+        if: steps.run.outputs.result == 'ok'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md data/songs.json
+          git commit -m "song: new suggestion from #${{ github.event.issue.number }}"
+          git pull --rebase
+          git push
+
+      - name: Reply and close issue
+        if: always() && steps.run.outputs.reply_file != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          RESULT: ${{ steps.run.outputs.result }}
+          REPLY_FILE: ${{ steps.run.outputs.reply_file }}
+        run: |
+          gh issue comment "$NUMBER" --body-file "$REPLY_FILE"
+          if [ "$RESULT" = "ok" ]; then
+            gh issue close "$NUMBER" --reason completed
+          else
+            gh issue close "$NUMBER" --reason "not planned"
+          fi

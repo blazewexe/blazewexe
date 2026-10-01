@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240" role="img"
+     aria-label="hi, im blaze. github blazewexe. just a programmer.">
+<style>
+  .bar { fill:#1db954; transform-box:fill-box; transform-origin:50% 100%;
+         animation-duration:1.000s; animation-iteration-count:infinite;
+         animation-timing-function:ease-in-out; opacity:.9 }
+  .p0 { animation-name:b0 } .p1 { animation-name:b1 }
+  .p2 { animation-name:b2 } .p3 { animation-name:b3 }
+  @keyframes b0 { 0%,100% { transform:scaleY(.12) } 25% { transform:scaleY(1) } 55% { transform:scaleY(.35) } 80% { transform:scaleY(.7) } }
+  @keyframes b1 { 0%,100% { transform:scaleY(.2) } 20% { transform:scaleY(.55) } 50% { transform:scaleY(.95) } 75% { transform:scaleY(.3) } }
+  @keyframes b2 { 0%,100% { transform:scaleY(.15) } 30% { transform:scaleY(.8) } 60% { transform:scaleY(.25) } 85% { transform:scaleY(1) } }
+  @keyframes b3 { 0%,100% { transform:scaleY(.25) } 15% { transform:scaleY(.9) } 45% { transform:scaleY(.4) } 70% { transform:scaleY(.65) } }
+  .pulse { fill:none; stroke:#1db954; stroke-width:2; transform-box:fill-box; transform-origin:50% 50%;
+           animation:ring 0.500s ease-out infinite }
+  @keyframes ring { 0% { transform:scale(.4); opacity:1 } 100% { transform:scale(1.6); opacity:0 } }
+  .dot { fill:#1db954 }
+  .line { opacity:0; animation-name:show; animation-duration:8.000s; animation-timing-function:linear;
+          animation-iteration-count:infinite; animation-fill-mode:backwards }
+  @keyframes show { 0% { opacity:0 } 1% { opacity:1 } 24% { opacity:1 } 25%,100% { opacity:0 } }
+  .cover { transform-box:fill-box; transform-origin:100% 50%;
+           animation-name:type; animation-duration:8.000s; animation-iteration-count:infinite; animation-fill-mode:backwards }
+  @keyframes type { 0% { transform:scaleX(1) } 12.50% { transform:scaleX(0) } 100% { transform:scaleX(0) } }
+  @media (prefers-reduced-motion: reduce) {
+    .bar, .pulse, .cover, .line { animation:none }
+    .bar { transform:scaleY(.5) } .cover { transform:scaleX(0) }
+    .line { opacity:0 } .line:first-of-type { opacity:1 }
+  }
+</style>
+<rect width="900" height="240" rx="10" fill="#0d1117" stroke="#30363d"/>
+<text x="852" y="44" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#7d8590">120 bpm</text>
+<circle class="dot" cx="52" cy="44" r="4"/>
+<circle class="pulse" cx="52" cy="44" r="9"/>
+<text x="70" y="49" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#7d8590">now playing</text>
+<g class="line" style="animation-delay:0.000s">
+  <text x="48" y="112" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="38" fill="#e6edf3" xml:space="preserve">hi, im blaze</text>
+  <rect class="cover" x="48" y="74" width="284" height="54" fill="#0d1117"
+        style="animation-timing-function:steps(12,end);animation-delay:0.000s"/>
+</g>
+<g class="line" style="animation-delay:2.000s">
+  <text x="48" y="112" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="38" fill="#e6edf3" xml:space="preserve">github: blazewexe</text>
+  <rect class="cover" x="48" y="74" width="399" height="54" fill="#0d1117"
+        style="animation-timing-function:steps(17,end);animation-delay:2.000s"/>
+</g>
+<g class="line" style="animation-delay:4.000s">
+  <text x="48" y="112" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="38" fill="#e6edf3" xml:space="preserve">just a programmer</text>
+  <rect class="cover" x="48" y="74" width="399" height="54" fill="#0d1117"
+        style="animation-timing-function:steps(17,end);animation-delay:4.000s"/>
+</g>
+<g class="line" style="animation-delay:6.000s">
+  <text x="48" y="112" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="38" fill="#e6edf3" xml:space="preserve">building things on beat</text>
+  <rect class="cover" x="48" y="74" width="537" height="54" fill="#0d1117"
+        style="animation-timing-function:steps(23,end);animation-delay:6.000s"/>
+</g>
+<rect class="bar p0" x="48.0" y="151" width="12" height="64" rx="2" style="animation-delay:-0.000s"/>
+<rect class="bar p1" x="68.1" y="151" width="12" height="64" rx="2" style="animation-delay:-0.185s"/>
+<rect class="bar p2" x="88.2" y="151" width="12" height="64" rx="2" style="animation-delay:-0.370s"/>
+<rect class="bar p3" x="108.3" y="151" width="12" height="64" rx="2" style="animation-delay:-0.555s"/>
+<rect class="bar p0" x="128.4" y="151" width="12" height="64" rx="2" style="animation-delay:-0.740s"/>
+<rect class="bar p1" x="148.5" y="151" width="12" height="64" rx="2" style="animation-delay:-0.925s"/>
+<rect class="bar p2" x="168.6" y="151" width="12" height="64" rx="2" style="animation-delay:-0.110s"/>
+<rect class="bar p3" x="188.7" y="151" width="12" height="64" rx="2" style="animation-delay:-0.295s"/>
+<rect class="bar p0" x="208.8" y="151" width="12" height="64" rx="2" style="animation-delay:-0.480s"/>
+<rect class="bar p1" x="228.9" y="151" width="12" height="64" rx="2" style="animation-delay:-0.665s"/>
+<rect class="bar p2" x="249.0" y="151" width="12" height="64" rx="2" style="animation-delay:-0.850s"/>
+<rect class="bar p3" x="269.1" y="151" width="12" height="64" rx="2" style="animation-delay:-0.035s"/>
+<rect class="bar p0" x="289.2" y="151" width="12" height="64" rx="2" style="animation-delay:-0.220s"/>
+<rect class="bar p1" x="309.3" y="151" width="12" height="64" rx="2" style="animation-delay:-0.405s"/>
+<rect class="bar p2" x="329.4" y="151" width="12" height="64" rx="2" style="animation-delay:-0.590s"/>
+<rect class="bar p3" x="349.5" y="151" width="12" height="64" rx="2" style="animation-delay:-0.775s"/>
+<rect class="bar p0" x="369.6" y="151" width="12" height="64" rx="2" style="animation-delay:-0.960s"/>
+<rect class="bar p1" x="389.7" y="151" width="12" height="64" rx="2" style="animation-delay:-0.145s"/>
+<rect class="bar p2" x="409.8" y="151" width="12" height="64" rx="2" style="animation-delay:-0.330s"/>
+<rect class="bar p3" x="429.9" y="151" width="12" height="64" rx="2" style="animation-delay:-0.515s"/>
+<rect class="bar p0" x="450.0" y="151" width="12" height="64" rx="2" style="animation-delay:-0.700s"/>
+<rect class="bar p1" x="470.1" y="151" width="12" height="64" rx="2" style="animation-delay:-0.885s"/>
+<rect class="bar p2" x="490.2" y="151" width="12" height="64" rx="2" style="animation-delay:-0.070s"/>
+<rect class="bar p3" x="510.3" y="151" width="12" height="64" rx="2" style="animation-delay:-0.255s"/>
+<rect class="bar p0" x="530.4" y="151" width="12" height="64" rx="2" style="animation-delay:-0.440s"/>
+<rect class="bar p1" x="550.5" y="151" width="12" height="64" rx="2" style="animation-delay:-0.625s"/>
+<rect class="bar p2" x="570.6" y="151" width="12" height="64" rx="2" style="animation-delay:-0.810s"/>
+<rect class="bar p3" x="590.7" y="151" width="12" height="64" rx="2" style="animation-delay:-0.995s"/>
+<rect class="bar p0" x="610.8" y="151" width="12" height="64" rx="2" style="animation-delay:-0.180s"/>
+<rect class="bar p1" x="630.9" y="151" width="12" height="64" rx="2" style="animation-delay:-0.365s"/>
+<rect class="bar p2" x="651.0" y="151" width="12" height="64" rx="2" style="animation-delay:-0.550s"/>
+<rect class="bar p3" x="671.1" y="151" width="12" height="64" rx="2" style="animation-delay:-0.735s"/>
+<rect class="bar p0" x="691.2" y="151" width="12" height="64" rx="2" style="animation-delay:-0.920s"/>
+<rect class="bar p1" x="711.3" y="151" width="12" height="64" rx="2" style="animation-delay:-0.105s"/>
+<rect class="bar p2" x="731.4" y="151" width="12" height="64" rx="2" style="animation-delay:-0.290s"/>
+<rect class="bar p3" x="751.5" y="151" width="12" height="64" rx="2" style="animation-delay:-0.475s"/>
+<rect class="bar p0" x="771.6" y="151" width="12" height="64" rx="2" style="animation-delay:-0.660s"/>
+<rect class="bar p1" x="791.7" y="151" width="12" height="64" rx="2" style="animation-delay:-0.845s"/>
+<rect class="bar p2" x="811.8" y="151" width="12" height="64" rx="2" style="animation-delay:-0.030s"/>
+<rect class="bar p3" x="831.9" y="151" width="12" height="64" rx="2" style="animation-delay:-0.215s"/>
+</svg>

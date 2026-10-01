@@ -1,0 +1,12 @@
+name: Suggest a song
+description: Add a song to the chain on my profile
+title: "suggest"
+body:
+  - type: input
+    id: link
+    attributes:
+      label: Spotify track link
+      description: In Spotify use Share, then Copy Song Link. It must look like https://open.spotify.com/track/...
+      placeholder: https://open.spotify.com/track/...
+    validations:
+      required: true
