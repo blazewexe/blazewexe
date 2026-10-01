@@ -8,23 +8,24 @@ Anyone can drop the next song. Whatever gets suggested becomes the track playing
 
 <!--SONG:START-->
 <table><tr>
-<td><a href="https://open.spotify.com/track/2Lz4iCypeUTy62CP3Xwk6i"><img src="https://i.scdn.co/image/ab67616d00001e02c93a2d859ee3635aa415d61d" width="200" alt="Album art for Bee Gees Blanket the World"></a></td>
+<td><a href="https://open.spotify.com/track/6oMZhY0f1ReI6AJDDYfuSb"><img src="https://i.scdn.co/image/ab67616d00001e024768108e37209740cf5bc514" width="200" alt="Album art for Peter, Paul and Mary"></a></td>
 <td valign="top">
 <sub>NOW PLAYING</sub><br>
-<h3><a href="https://open.spotify.com/track/2Lz4iCypeUTy62CP3Xwk6i">Stayin&#x27; Alive - From &quot;Saturday Night Fever&quot; Soundtrack</a></h3>
-Bee Gees<br>
-<sub>Bee Gees Blanket the World</sub><br><br>
-suggested by <a href="https://github.com/blazewexe"><b>@blazewexe</b></a> on 2026-10-01<br>
-<sub>song #2 in the chain</sub>
+<h3><a href="https://open.spotify.com/track/6oMZhY0f1ReI6AJDDYfuSb">500 Miles</a></h3>
+Peter, Paul and Mary<br>
+<sub>Peter, Paul and Mary</sub><br><br>
+suggested by <a href="https://github.com/kAi-Xin-02"><b>@kAi-Xin-02</b></a> on 2026-10-01<br>
+<sub>song #3 in the chain</sub>
 </td></tr></table>
 
 <b>Previously played</b>
 
 <table>
+<tr><td><a href="https://open.spotify.com/track/2Lz4iCypeUTy62CP3Xwk6i"><img src="https://i.scdn.co/image/ab67616d00001e02c93a2d859ee3635aa415d61d" width="48" alt=""></a></td><td><a href="https://open.spotify.com/track/2Lz4iCypeUTy62CP3Xwk6i">Stayin&#x27; Alive - From &quot;Saturday Night Fever&quot; Soundtrack</a><br><sub>Bee Gees</sub></td><td><sub>by <a href="https://github.com/blazewexe">@blazewexe</a></sub></td></tr>
 <tr><td><a href="https://open.spotify.com/track/2YiCMmONQcoMPX2bV1LxE0"><img src="https://i.scdn.co/image/ab67616d00001e025e12c35cb4c848a927ef4b69" width="48" alt=""></a></td><td><a href="https://open.spotify.com/track/2YiCMmONQcoMPX2bV1LxE0">Everybody Wants To Rule The World</a><br><sub>Tears For Fears</sub></td><td><sub>by <a href="https://github.com/blazewexe">@blazewexe</a></sub></td></tr>
 </table>
 
-<a href="https://open.spotify.com/playlist/6NCd9oMmTrVp2WfrmRXusY">Listen to the full playlist (2 songs and counting)</a>
+<a href="https://open.spotify.com/playlist/6NCd9oMmTrVp2WfrmRXusY">Listen to the full playlist (3 songs and counting)</a>
 <!--SONG:END-->
 
 <p>
