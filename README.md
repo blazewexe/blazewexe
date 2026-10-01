@@ -21,15 +21,3 @@ No song yet. Be the first to suggest one.
 3. Submit the issue. A GitHub Action reads the link, looks the track up on Spotify, and updates this page in about a minute.
 
 Rules: Spotify track links only, one suggestion per person per day, no repeats, and clean (non-explicit) tracks only. The issue closes itself with a note on whether your song made it.
-
-## Make an infinite playlist like this
-
-The whole thing runs on GitHub Issues, GitHub Actions and the Spotify API. No server needed.
-
-1. Create a repo named exactly like your username (this is your profile README).
-2. Copy the files from this repo: `README.md`, `assets/`, `data/`, `scripts/` and `.github/`.
-3. Create an app at the Spotify developer dashboard and add its client id and secret as repo secrets named `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`.
-4. Optional, for the real playlist: create a public Spotify playlist, run `scripts/get_refresh_token.py` once, and add `SPOTIFY_REFRESH_TOKEN` and `SPOTIFY_PLAYLIST_ID` as secrets. Every accepted song then gets appended to it automatically.
-5. Change the names and links in `README.md`, edit `scripts/make_header.py` for your own header, and push.
-
-Full walkthrough is in [SETUP.md](SETUP.md).

@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -87,23 +88,93 @@ def account_age_days(login):
         return None  # do not block on a lookup failure
 
 
-def add_to_playlist(track_id):
-    """Optional: append to a real Spotify playlist. Needs refresh token + playlist id secrets."""
-    refresh, playlist = os.environ.get("SPOTIFY_REFRESH_TOKEN"), os.environ.get("SPOTIFY_PLAYLIST_ID")
-    if not (refresh and playlist):
+def playlist_id():
+    """Accepts a bare ID, a playlist URL (with or without ?si=...), or a spotify:playlist: URI."""
+    raw = (os.environ.get("SPOTIFY_PLAYLIST_ID") or "").strip()
+    m = re.search(r"playlist[/:]([A-Za-z0-9]{22})", raw) or re.match(r"([A-Za-z0-9]{22})(?:[?&#].*)?$", raw)
+    return m.group(1) if m else None
+
+
+def playlist_track_ids(pid, headers):
+    """Return track IDs already in the playlist, using the current API first."""
+    for path in ("items", "tracks"):
+        found = set()
+        offset = 0
+        try:
+            while True:
+                page = http(
+                    f"https://api.spotify.com/v1/playlists/{pid}/{path}?limit=100&offset={offset}",
+                    headers=headers,
+                )
+                for entry in page.get("items", []):
+                    track = entry.get("item") or entry.get("track") or entry
+                    track_id = track.get("id") if isinstance(track, dict) else None
+                    if track_id:
+                        found.add(track_id)
+                items = page.get("items", [])
+                if not page.get("next") or not items:
+                    return found
+                offset += len(items)
+        except urllib.error.HTTPError as e:
+            if e.code not in (404, 405):
+                raise
+    return set()
+
+
+def add_tracks_to_playlist(track_ids):
+    """Optional: append to a real Spotify playlist. Returns True, False, or None (not configured).
+
+    Skips tracks already present, then tries POST /items and falls back to POST /tracks
+    if Spotify answers 404/405. Details go to the Action log only.
+    """
+    refresh, pid = os.environ.get("SPOTIFY_REFRESH_TOKEN"), playlist_id()
+    if not os.environ.get("SPOTIFY_PLAYLIST_ID") or not refresh:
         return None
+    if not pid:
+        print("playlist add failed: SPOTIFY_PLAYLIST_ID is not a valid playlist id or link", file=sys.stderr)
+        return False
     try:
         tok = _token({"grant_type": "refresh_token", "refresh_token": refresh})
-        http(
-            f"https://api.spotify.com/v1/playlists/{playlist}/items",
-            json.dumps({"uris": [f"spotify:track:{track_id}"]}).encode(),
-            {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"},
-            "POST",
-        )
-        return True
     except Exception as e:
-        print("playlist add failed:", e, file=sys.stderr)
+        print("playlist add failed: could not refresh token:", repr(e), file=sys.stderr)
         return False
+    headers = {"Authorization": f"Bearer {tok}", "Content-Type": "application/json"}
+    requested = list(dict.fromkeys(t for t in track_ids if t))
+    if not requested:
+        return True
+    try:
+        existing = playlist_track_ids(pid, headers)
+    except Exception as e:
+        print("playlist add failed: could not read existing items:", repr(e), file=sys.stderr)
+        return False
+    pending = [track_id for track_id in requested if track_id not in existing]
+    if not pending:
+        print("playlist already contains all requested tracks")
+        return True
+
+    for start in range(0, len(pending), 100):
+        body = json.dumps({"uris": [f"spotify:track:{t}" for t in pending[start:start + 100]]}).encode()
+        added = False
+        for path in ("items", "tracks"):
+            try:
+                http(f"https://api.spotify.com/v1/playlists/{pid}/{path}", body, headers, "POST")
+                added = True
+                break
+            except urllib.error.HTTPError as e:
+                detail = e.read()[:300].decode("utf-8", "replace")
+                print(f"playlist add via /{path} failed: HTTP {e.code} {detail}", file=sys.stderr)
+                if e.code not in (404, 405):
+                    return False
+            except Exception as e:
+                print(f"playlist add via /{path} failed: {e!r}", file=sys.stderr)
+                return False
+        if not added:
+            return False
+    return True
+
+
+def add_to_playlist(track_id):
+    return add_tracks_to_playlist([track_id])
 
 
 def esc(s):
@@ -111,7 +182,7 @@ def esc(s):
 
 
 def render(songs):
-    playlist = os.environ.get("SPOTIFY_PLAYLIST_ID")
+    playlist = playlist_id()
     if not songs:
         return "No song yet. Be the first to suggest one."
     cur = songs[-1]
@@ -194,10 +265,12 @@ def process(title, body, user, owner=None, now=None):
     DATA.write_text(json.dumps(songs, indent=2) + "\n")
     write_readme(songs)
 
-    added = add_to_playlist(track_id)
+    added = add_tracks_to_playlist([s["id"] for s in songs])
     msg = f"Added **{esc(track['title'])}** by {esc(', '.join(track['artists']))}. It is now playing on the profile README."
     if added is True:
-        msg += " It was also appended to the playlist."
+        msg += " The Spotify playlist is synchronized."
+    elif added is False:
+        msg += " The playlist add failed, so check the Action log. The song is still on the README."
     return msg
 
 

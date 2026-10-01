@@ -28,7 +28,7 @@ class H(BaseHTTPRequestHandler):
 
 url = "https://accounts.spotify.com/authorize?" + urllib.parse.urlencode(
     {"client_id": CID, "response_type": "code", "redirect_uri": REDIRECT,
-     "scope": "playlist-modify-public playlist-modify-private", "state": STATE}
+     "scope": "playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative", "state": STATE}
 )
 print("Opening browser. If nothing opens, visit:\n" + url)
 webbrowser.open(url)

@@ -4,7 +4,7 @@ Edit BPM / LINES, then run:  python scripts/make_header.py
 """
 from pathlib import Path
 
-BPM = 120
+BPM = 67
 LINES = [
     "hi, im blaze",
     "github: blazewexe",
