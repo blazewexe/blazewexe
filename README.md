@@ -8,17 +8,23 @@ Anyone can drop the next song. Whatever gets suggested becomes the track playing
 
 <!--SONG:START-->
 <table><tr>
-<td><a href="https://open.spotify.com/track/2YiCMmONQcoMPX2bV1LxE0"><img src="https://i.scdn.co/image/ab67616d00001e025e12c35cb4c848a927ef4b69" width="200" alt="Album art for Songs From The Big Chair"></a></td>
+<td><a href="https://open.spotify.com/track/2Lz4iCypeUTy62CP3Xwk6i"><img src="https://i.scdn.co/image/ab67616d00001e02c93a2d859ee3635aa415d61d" width="200" alt="Album art for Bee Gees Blanket the World"></a></td>
 <td valign="top">
 <sub>NOW PLAYING</sub><br>
-<h3><a href="https://open.spotify.com/track/2YiCMmONQcoMPX2bV1LxE0">Everybody Wants To Rule The World</a></h3>
-Tears For Fears<br>
-<sub>Songs From The Big Chair</sub><br><br>
+<h3><a href="https://open.spotify.com/track/2Lz4iCypeUTy62CP3Xwk6i">Stayin&#x27; Alive - From &quot;Saturday Night Fever&quot; Soundtrack</a></h3>
+Bee Gees<br>
+<sub>Bee Gees Blanket the World</sub><br><br>
 suggested by <a href="https://github.com/blazewexe"><b>@blazewexe</b></a> on 2026-10-01<br>
-<sub>song #1 in the chain</sub>
+<sub>song #2 in the chain</sub>
 </td></tr></table>
 
-<a href="https://open.spotify.com/playlist/6NCd9oMmTrVp2WfrmRXusY?si=F27DyvP9TqSmKjbJ2ugCqg">Listen to the full playlist (1 songs and counting)</a>
+<b>Previously played</b>
+
+<table>
+<tr><td><a href="https://open.spotify.com/track/2YiCMmONQcoMPX2bV1LxE0"><img src="https://i.scdn.co/image/ab67616d00001e025e12c35cb4c848a927ef4b69" width="48" alt=""></a></td><td><a href="https://open.spotify.com/track/2YiCMmONQcoMPX2bV1LxE0">Everybody Wants To Rule The World</a><br><sub>Tears For Fears</sub></td><td><sub>by <a href="https://github.com/blazewexe">@blazewexe</a></sub></td></tr>
+</table>
+
+<a href="https://open.spotify.com/playlist/6NCd9oMmTrVp2WfrmRXusY">Listen to the full playlist (2 songs and counting)</a>
 <!--SONG:END-->
 
 <p>
