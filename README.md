@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/header.svg?v=2" alt="hi, im blaze. github blazewexe. just a programmer." width="900">
+  <img src="assets/header.svg?v=3" alt="hi, im blaze. github blazewexe. just a programmer." width="900">
 </p>
 
 ## Song chain
