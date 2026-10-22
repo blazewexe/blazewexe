@@ -20,7 +20,7 @@ DESCRIPTIONS = {
 
 
 def clean(value):
-    """Keep API text on one safe Markdown table row."""
+    """Keep API text on one safe Markdown line."""
     value = re.sub(r"\s+", " ", str(value or "")).strip()
     return html.escape(value, quote=False).replace("|", "&#124;")
 
@@ -49,22 +49,21 @@ def repositories():
 
 def render(repos):
     if not repos:
-        return "| No public projects found yet. | | |"
+        return "No public projects found yet."
     rows = []
     for repo in repos:
         name = clean(repo.get("name", "Project"))
-        if repo.get("fork"):
-            name += " (fork)"
         slug = urllib.parse.quote(repo.get("name", ""), safe="-_.")
         link = f"https://github.com/{OWNER}/{slug}"
-        project = f"[{name}]({link})"
+        project = f"**[{name}]({link})**"
+        if repo.get("fork"):
+            project += " *(fork)*"
         homepage = repo.get("homepage") or ""
         if homepage.startswith(("https://", "http://")):
             homepage = homepage.replace(" ", "%20").replace("(", "%28").replace(")", "%29")
             project += f" · [Live demo]({homepage})"
-        description = clean(repo.get("description") or DESCRIPTIONS.get(repo.get("name")) or "")
-        language = clean(repo.get("language") or "—")
-        rows.append(f"| {project} | {description} | {language} |")
+        description = clean(DESCRIPTIONS.get(repo.get("name")) or repo.get("description") or "")
+        rows.append(f"- {project} — {description}" if description else f"- {project}")
     return "\n".join(rows)
 
 

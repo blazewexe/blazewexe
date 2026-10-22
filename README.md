@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/avatar.png" width="112" alt="Blaze's avatar" />
+  <img src="https://github.com/blazewexe.png?size=224" width="112" alt="Blaze's GitHub avatar" />
 
   # Hey, I'm Blaze
 
@@ -10,17 +10,11 @@
 
 ## Latest projects
 
-| Project | About | Main language |
-| --- | --- | --- |
 <!--PROJECTS:START-->
-| [OpenPass (fork)](https://github.com/blazewexe/openpass) | Event management and ticketing platform. | TypeScript |
-| [Wex-To-Do-List](https://github.com/blazewexe/Wex-To-Do-List) · [Live demo](https://blazewexe.github.io/Wex-To-Do-List/) | A lightweight task list with filters, sorting, and local persistence. | CSS |
-| [yt-music-rpc](https://github.com/blazewexe/yt-music-rpc) | YouTube Music Discord Rich Presence and Last.fm scrobbling. | JavaScript |
+- **[openpass](https://github.com/blazewexe/openpass)** *(fork)* — Event management and ticketing platform.
+- **[Wex-To-Do-List](https://github.com/blazewexe/Wex-To-Do-List)** · [Live demo](https://blazewexe.github.io/Wex-To-Do-List/) — A lightweight task list with filters, sorting, and local persistence.
+- **[yt-music-rpc](https://github.com/blazewexe/yt-music-rpc)** — YouTube Music Discord Rich Presence and Last.fm scrobbling.
 <!--PROJECTS:END-->
-
-## Tech stack
-
-`JavaScript` · `TypeScript` · `Python` · `HTML` · `CSS` · `React` · `Next.js` · `Tailwind CSS` · `Node.js` · `GitHub Actions`
 
 ## Song chain
 
