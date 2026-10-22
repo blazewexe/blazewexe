@@ -22,7 +22,7 @@ README = ROOT / "README.md"
 START, END = "<!--SONG:START-->", "<!--SONG:END-->"
 
 # ---- settings -------------------------------------------------------------
-HISTORY_SHOWN = 8          # rows in the "previously played" table
+HISTORY_SHOWN = 1          # keep the profile display to the newest two songs
 COOLDOWN_HOURS = 24        # one suggestion per user per this many hours
 MIN_ACCOUNT_AGE_DAYS = 7   # reject brand new accounts (0 to disable)
 BLOCK_EXPLICIT = True      # reject tracks Spotify flags as explicit
@@ -189,30 +189,24 @@ def render(songs):
     when = cur["at"][:10]
     out = [
         "<table><tr>",
-        f'<td><a href="{esc(cur["url"])}"><img src="{esc(cur["image"])}" width="200" alt="Album art for {esc(cur["album"])}"></a></td>',
+        f'<td><a href="{esc(cur["url"])}"><img src="{esc(cur["image"])}" width="96" alt="Album art for {esc(cur["album"])}"></a></td>',
         '<td valign="top">',
-        "<sub>NOW PLAYING</sub><br>",
-        f'<h3><a href="{esc(cur["url"])}">{esc(cur["title"])}</a></h3>',
-        f'{esc(", ".join(cur["artists"]))}<br>',
-        f'<sub>{esc(cur["album"])}</sub><br><br>',
-        f'suggested by <a href="https://github.com/{esc(cur["by"])}"><b>@{esc(cur["by"])}</b></a> on {esc(when)}<br>',
-        f'<sub>song #{len(songs)} in the chain</sub>',
+        f'<sub>NOW PLAYING · #{len(songs)}</sub><br>',
+        f'<strong><a href="{esc(cur["url"])}">{esc(cur["title"])}</a></strong><br>',
+        f'{esc(", ".join(cur["artists"]))} · <em>{esc(cur["album"])}</em><br>',
+        f'<sub>suggested by <a href="https://github.com/{esc(cur["by"])}">@{esc(cur["by"])}</a> · {esc(when)}</sub>',
         "</td></tr></table>",
     ]
     prev = list(reversed(songs[:-1]))[:HISTORY_SHOWN]
     if prev:
-        out += ["", "<b>Previously played</b>", "", "<table>"]
+        out += ["", "<sub>BEFORE THAT</sub>"]
         for s in prev:
             out.append(
-                "<tr>"
-                f'<td><a href="{esc(s["url"])}"><img src="{esc(s["image"])}" width="48" alt=""></a></td>'
-                f'<td><a href="{esc(s["url"])}">{esc(s["title"])}</a><br><sub>{esc(", ".join(s["artists"]))}</sub></td>'
-                f'<td><sub>by <a href="https://github.com/{esc(s["by"])}">@{esc(s["by"])}</a></sub></td>'
-                "</tr>"
+                f' · <a href="{esc(s["url"])}">{esc(s["title"])}</a> — {esc(", ".join(s["artists"]))}'
+                f' · suggested by <a href="https://github.com/{esc(s["by"])}">@{esc(s["by"])}</a>'
             )
-        out.append("</table>")
     if playlist:
-        out += ["", f'<a href="https://open.spotify.com/playlist/{esc(playlist)}">Listen to the full playlist ({len(songs)} songs and counting)</a>']
+        out += ["", f'<sub><a href="https://open.spotify.com/playlist/{esc(playlist)}">Full playlist · {len(songs)} songs</a></sub>']
     return "\n".join(out)
 
 

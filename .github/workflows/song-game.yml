@@ -4,9 +4,9 @@ on:
   issues:
     types: [opened]
 
-# Serialize runs so two simultaneous suggestions never clobber each other's commit.
+# Serialize README writers so suggestions and scheduled project refreshes do not race.
 concurrency:
-  group: song-game
+  group: profile-readme
   cancel-in-progress: false
 
 permissions:
