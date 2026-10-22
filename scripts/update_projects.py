@@ -62,7 +62,7 @@ def render(repos):
         if homepage.startswith(("https://", "http://")):
             homepage = homepage.replace(" ", "%20").replace("(", "%28").replace(")", "%29")
             project += f" · [Live demo]({homepage})"
-        description = clean(DESCRIPTIONS.get(repo.get("name")) or repo.get("description") or "")
+        description = clean(repo.get("description") or DESCRIPTIONS.get(repo.get("name")) or "")
         rows.append(f"- {project} — {description}" if description else f"- {project}")
     return "\n".join(rows)
 
