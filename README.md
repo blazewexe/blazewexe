@@ -11,9 +11,9 @@
 ## Latest projects
 
 <!--PROJECTS:START-->
-- **[openpass](https://github.com/blazewexe/openpass)** *(fork)* — Event management and ticketing platform.
-- **[Wex-To-Do-List](https://github.com/blazewexe/Wex-To-Do-List)** · [Live demo](https://blazewexe.github.io/Wex-To-Do-List/) — A lightweight task list with filters, sorting, and local persistence.
-- **[yt-music-rpc](https://github.com/blazewexe/yt-music-rpc)** — YouTube Music Discord Rich Presence and Last.fm scrobbling.
+- **[openpass](https://github.com/blazewexe/openpass)** *(fork)* · [Live demo](https://makemyevent.org) — Event management and ticketing platform.
+- **[Wex-To-Do-List](https://github.com/blazewexe/Wex-To-Do-List)** · [Live demo](https://blazewexe.github.io/Wex-To-Do-List/) — To-Do list which does the work.
+- **[yt-music-rpc](https://github.com/blazewexe/yt-music-rpc)** — an extension to show your YouTube Music RPC in Discord ( without installing anything in desktop )
 <!--PROJECTS:END-->
 
 ## Song chain
